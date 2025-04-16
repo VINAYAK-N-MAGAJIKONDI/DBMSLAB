@@ -98,6 +98,16 @@ CREATE TABLE BOOK_PARTITION (
     PRIMARY KEY (Book_id, PubYear)
 )
 
+INSERT INTO BOOK_PARTITION (Book_id, Title, PubYear) VALUES
+(1, 'The Guide', 1958),
+(2, 'Malgudi Days', 1982),
+(3, 'Train to Pakistan', 1946),
+(4, 'God of Small Things', 1997),
+(5, 'Wings of Fire', 1999),
+(6, 'The Discovery of India', 1946),
+(7, 'Midnight’s Children', 1981),
+(8, 'The White Tiger', 2008),
+(9, 'A Suitable Boy', 2003);
 
 
 
