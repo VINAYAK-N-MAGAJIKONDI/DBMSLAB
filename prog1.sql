@@ -1,4 +1,3 @@
-
 CREATE TABLE BOOK (  
     Book_id INT PRIMARY KEY,
     Title VARCHAR(255),
@@ -91,12 +90,16 @@ SELECT Card_No, COUNT(Book_id) AS Total_Books FROM BOOK_LENDING WHERE Date_Out B
 
 DELETE FROM BOOK WHERE Book_id = 3;
 
+SELECT * FROM BOOK;
+
 CREATE TABLE BOOK_PARTITION (
     Book_id INT,
-    Title VARCHAR(255),
+    Title VARCHAR(225),
     PubYear INT NOT NULL,
     PRIMARY KEY (Book_id, PubYear)
-)
+);
+
+
 
 INSERT INTO BOOK_PARTITION (Book_id, Title, PubYear) VALUES
 (1, 'The Guide', 1958),
@@ -109,19 +112,14 @@ INSERT INTO BOOK_PARTITION (Book_id, Title, PubYear) VALUES
 (8, 'The White Tiger', 2008),
 (9, 'A Suitable Boy', 2003);
 
-
-
-PARTITION BY RANGE (PubYear) (
-    PARTITION p_before_1950 VALUES LESS THAN (1950),
-    PARTITION p_1950_2000 VALUES LESS THAN (2000),
-    PARTITION p_after_2000 VALUES LESS THAN (2100)
-);
+SELECT *,
+  CASE
+    WHEN PubYear < 1950 THEN 'p_before_1950'
+    WHEN PubYear < 2000 THEN 'p_1950_2000'
+    ELSE 'p_after_2000'
+  END AS Partition_Logical_Label
+FROM BOOK_PARTITION;
 
 CREATE VIEW BOOK_AVAILABILITY AS SELECT B.Title, C.No_Of_Copies FROM BOOK B, BOOK_COPIES C WHERE B.Book_Id = C.Book_Id;
 
 SELECT *FROM BOOK_AVAILABILITY;
-
-
-
-
-
